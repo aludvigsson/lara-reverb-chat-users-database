@@ -27,7 +27,7 @@ class ChatController extends Controller
         $message->content = $request->input('message');
         $message->save();
 
-        MessageSent::broadcast($message->content, $message->user_id);
+        MessageSent::broadcast($message->content, $message->user_id, Auth::user()->name);
 
         return response()->json([
             'message' => $message->load('user'),
